@@ -29,7 +29,7 @@ function manipularJson() {
 function gravarArquivo(obj) {
     fs.writeFile("saida.json", JSON.stringify(obj), err => {
         if (err) throw err;
-        console.log("Done writing"); 
+        console.log("Done writing");
     });
 }
 
@@ -42,13 +42,13 @@ function corrigirNomes(str) {
 }
 //https://ricardo-reis.medium.com/o-m%C3%A9todo-sort-do-array-javascript-482576734e0a
 function ordenarId() {
-    jsonData = jsonData.sort(function (x,y){
+    jsonData = jsonData.sort(function (x, y) {
         return x.id - y.id
     })
 }
 //https://ricardo-reis.medium.com/o-m%C3%A9todo-sort-do-array-javascript-482576734e0a
 function ordenarCategoria() {
-    jsonData = jsonData.sort(function (x,y){
+    jsonData = jsonData.sort(function (x, y) {
         if (x.category > y.category) return 1;
         if (x.category < y.category) return -1;
         return 0
@@ -60,28 +60,32 @@ function somarCategoria() {
     let somaEletrodomesticos = 0
     let somaEletronicos = 0
     let somaPanelas = 0
-    
-    for(let i = 0; i < jsonData.length; i++) {
-        const auxiliar = jsonData[i].price * jsonData[i].quantity
-        switch(jsonData[i].category) {
-            case 'Acessórios':
-                somaAcessorios += auxiliar
-                break
-            case 'Eletrodomésticos':
-                somaEletrodomesticos += auxiliar
-                break
-            case 'Eletrônicos':
-                somaEletronicos += auxiliar
-                break
-            case 'Panelas':
-                somaPanelas += auxiliar
-                break
+    if(jsonData.length > 0) {
 
+        for (let i = 0; i < jsonData.length; i++) {
+            const auxiliar = jsonData[i].price * jsonData[i].quantity
+            switch (jsonData[i].category) {
+                case 'Acessórios':
+                    somaAcessorios += auxiliar
+                    break
+                case 'Eletrodomésticos':
+                    somaEletrodomesticos += auxiliar
+                    break
+                case 'Eletrônicos':
+                    somaEletronicos += auxiliar
+                    break
+                case 'Panelas':
+                    somaPanelas += auxiliar
+                    break
+                default:
+                    break
+            }
         }
+        console.log(`Soma total de Acessórios: R$ ${somaAcessorios}`)
+        console.log(`Soma total de Eletrodomésticos: R$ ${somaEletrodomesticos}`)
+        console.log(`Soma total dos Eletrônicos: R$ ${somaEletronicos}`)
+        console.log(`Soma total das Panelas: R$ ${somaPanelas}`)
     }
-    
-    console.log(somaAcessorios, somaEletrodomesticos, somaEletronicos, somaPanelas)
-
 }
 
 lerArquivo();
@@ -89,5 +93,4 @@ ordenarId();
 ordenarCategoria();
 manipularJson();
 gravarArquivo(jsonData);
-
 somarCategoria()
