@@ -1,6 +1,5 @@
 //https://acervolima.com/como-ler-e-escrever-um-arquivo-json-usando-node-js/
 const fs = require("fs");
-const { json } = require("stream/consumers");
 
 let jsonData = []
 function lerArquivo() {
@@ -26,10 +25,10 @@ function manipularJson() {
     })
 }
 
+//https://acervolima.com/como-ler-e-escrever-um-arquivo-json-usando-node-js/
 function gravarArquivo(obj) {
     fs.writeFile("saida.json", JSON.stringify(obj), err => {
         if (err) throw err;
-        console.log("Done writing");
     });
 }
 
@@ -41,12 +40,14 @@ function corrigirNomes(str) {
     return str
 }
 //https://ricardo-reis.medium.com/o-m%C3%A9todo-sort-do-array-javascript-482576734e0a
+
 function ordenarId() {
     jsonData = jsonData.sort(function (x, y) {
         return x.id - y.id
     })
 }
 //https://ricardo-reis.medium.com/o-m%C3%A9todo-sort-do-array-javascript-482576734e0a
+
 function ordenarCategoria() {
     jsonData = jsonData.sort(function (x, y) {
         if (x.category > y.category) return 1;
@@ -60,7 +61,7 @@ function somarCategoria() {
     let somaEletrodomesticos = 0
     let somaEletronicos = 0
     let somaPanelas = 0
-    if(jsonData.length > 0) {
+    if (jsonData.length > 0) {
 
         for (let i = 0; i < jsonData.length; i++) {
             const auxiliar = jsonData[i].price * jsonData[i].quantity
